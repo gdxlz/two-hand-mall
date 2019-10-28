@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzf.repository.GoodPictureMapper" >
+	<resultMap id="BaseResultMap" type="com.hzf.entity.GoodPicture" >
+		<id column="good_id" property="goodId" jdbcType="INTEGER" />
+		<result column="good_name" property="goodName" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="price" property="price" jdbcType="REAL" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="catelog_id" property="catelogId" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+
+		<result column="picture_id" property="pictureId" jdbcType="INTEGER" />
+		<result column="picture_good_id" property="pictureGoodId" jdbcType="INTEGER" />
+		<result column="picture_url" property="pictureUrl" jdbcType="VARCHAR" />
+	</resultMap>
+
+    <select id="findAllGoodPicture" resultMap="BaseResultMap">
+      SELECT DISTINCT good.good_id,catelog_id,description,good_name,price,status,user_id,pic.good_id AS picture_good_id,picture_id,picture_url
+      FROM good,(SELECT *
+									FROM	pictures
+									WHERE picture_id
+									in (SELECT MIN(picture_id)
+									FROM pictures pic
+									WHERE pic.good_id=pictures.good_id)
+									ORDER BY picture_id)pic
+      WHERE good.good_id=pic.good_id AND `status`='0'
+    </select>
+</mapper>
