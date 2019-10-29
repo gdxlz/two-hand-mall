@@ -1,9 +1,8 @@
 package com.hzf.controller;
 
-import com.hzf.entity.Good;
-import com.hzf.entity.GoodPicture;
-import com.hzf.entity.Pictures;
-import com.hzf.entity.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.hzf.entity.*;
 import com.hzf.service.GoodService;
 import com.hzf.service.PictureService;
 import com.hzf.service.UserService;
@@ -29,33 +28,28 @@ public class GoodController {
     private UserService userService;
     @Autowired
     private PictureService pictureService;
-    //定义一页商品的个数
-    public static final int PAGE_SIZE = 8;
 
-
-//    查找所有的商品的信息以及一张图片
+// 查找所有的商品的信息以及一张图片
     @ResponseBody
     @GetMapping("/queryAllGoodPicture")
-    public ModelAndView queryAllGoodPicture(
-            @RequestParam(value="pageNo",required=false,defaultValue="1")int pageNo)
+    public PageInfo<GoodPicture> queryAllGoodPicture(
+            @RequestParam(value="pageNo",required=false,defaultValue="1")int pageNo,
+            @RequestParam(value="pageSize",required=false,defaultValue="4")int pageSize)
     {
-        ModelAndView mv =new ModelAndView();
-//        PageHelper.startPage(pageNo,PAGE_SIZE);
+        PageHelper.startPage(pageNo,pageSize);
         List<GoodPicture> list = goodService.findAllGoodPicture();
-//        PageInfo pageInfo = new PageInfo<>(list);
-        mv.addObject("goodPictureList",list);
-//        mv.addObject("pageInfo",pageInfo);
-        mv.setViewName("index");
+        PageInfo<GoodPicture> pageInfo = new PageInfo<>(list);
         for (GoodPicture goodPicture:list
                 ) {
             System.out.println(goodPicture);
         }
-        return mv;
+        return pageInfo;
     }
 
 //    根据用户点击输入的id查找商品，以及相关的用户，图片信息
+    @ResponseBody
     @RequestMapping(value="/showGoodDetail/{goodId}",method=RequestMethod.GET)
-    public ModelAndView showGoodDetail(@PathVariable Integer goodId){
+    public GoodDetail showGoodDetail(@PathVariable Integer goodId){
         System.out.println(goodId);
 //    通过商品id获取商品信息
         Good good = goodService.findGoodById(goodId);
@@ -65,18 +59,18 @@ public class GoodController {
         User user = userService.findUserById(uid);
 //    通过商品的id获取图片信息
         List<Pictures> list= pictureService.findPictureById(goodId);
-        ModelAndView mv =new ModelAndView();
-        mv.addObject("good", good);
-        mv.addObject("user", user);
-        mv.addObject("pictures", list);
-        mv.setViewName("GoodDetail");
+       GoodDetail goodDetail = new GoodDetail();
+       goodDetail.setGood(good);
+       goodDetail.setPicturesList(list);
+       goodDetail.setUid(uid);
+       goodDetail.setUserName(user.getUsername());
         System.out.println(good);
         System.out.println(user);
         for (Pictures pic:list
              ) {
             System.out.println(pic);
         }
-        return mv;
+        return goodDetail;
     }
 //上传商品
     @RequestMapping("/saveGood")

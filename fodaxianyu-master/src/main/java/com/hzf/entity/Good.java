@@ -11,7 +11,7 @@ public class Good {
 
     private String description;
 
-    private Integer catelogId;
+    private String catelog;
 
     private Integer status;
 
@@ -55,12 +55,12 @@ public class Good {
         this.description = description == null ? null : description.trim();
     }
 
-    public Integer getCatelogId() {
-        return catelogId;
+    public String getCatelog() {
+        return catelog;
     }
 
-    public void setCatelogId(Integer catelogId) {
-        this.catelogId = catelogId;
+    public void setCatelog(String catelog) {
+        this.catelog = catelog == null ? null : catelog.trim();
     }
 
     public Integer getStatus() {
@@ -79,7 +79,7 @@ public class Good {
                 ", userId=" + userId +
                 ", price=" + price +
                 ", description='" + description + '\'' +
-                ", catelogId=" + catelogId +
+                ", catelog='" + catelog + '\'' +
                 ", status=" + status +
                 '}';
     }

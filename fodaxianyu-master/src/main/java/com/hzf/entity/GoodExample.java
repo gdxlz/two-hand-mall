@@ -424,63 +424,73 @@ public class GoodExample {
             return (Criteria) this;
         }
 
-        public Criteria andCatelogIdIsNull() {
-            addCriterion("catelog_id is null");
+        public Criteria andCatelogIsNull() {
+            addCriterion("catelog is null");
             return (Criteria) this;
         }
 
-        public Criteria andCatelogIdIsNotNull() {
-            addCriterion("catelog_id is not null");
+        public Criteria andCatelogIsNotNull() {
+            addCriterion("catelog is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCatelogIdEqualTo(Integer value) {
-            addCriterion("catelog_id =", value, "catelogId");
+        public Criteria andCatelogEqualTo(String value) {
+            addCriterion("catelog =", value, "catelog");
             return (Criteria) this;
         }
 
-        public Criteria andCatelogIdNotEqualTo(Integer value) {
-            addCriterion("catelog_id <>", value, "catelogId");
+        public Criteria andCatelogNotEqualTo(String value) {
+            addCriterion("catelog <>", value, "catelog");
             return (Criteria) this;
         }
 
-        public Criteria andCatelogIdGreaterThan(Integer value) {
-            addCriterion("catelog_id >", value, "catelogId");
+        public Criteria andCatelogGreaterThan(String value) {
+            addCriterion("catelog >", value, "catelog");
             return (Criteria) this;
         }
 
-        public Criteria andCatelogIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("catelog_id >=", value, "catelogId");
+        public Criteria andCatelogGreaterThanOrEqualTo(String value) {
+            addCriterion("catelog >=", value, "catelog");
             return (Criteria) this;
         }
 
-        public Criteria andCatelogIdLessThan(Integer value) {
-            addCriterion("catelog_id <", value, "catelogId");
+        public Criteria andCatelogLessThan(String value) {
+            addCriterion("catelog <", value, "catelog");
             return (Criteria) this;
         }
 
-        public Criteria andCatelogIdLessThanOrEqualTo(Integer value) {
-            addCriterion("catelog_id <=", value, "catelogId");
+        public Criteria andCatelogLessThanOrEqualTo(String value) {
+            addCriterion("catelog <=", value, "catelog");
             return (Criteria) this;
         }
 
-        public Criteria andCatelogIdIn(List<Integer> values) {
-            addCriterion("catelog_id in", values, "catelogId");
+        public Criteria andCatelogLike(String value) {
+            addCriterion("catelog like", value, "catelog");
             return (Criteria) this;
         }
 
-        public Criteria andCatelogIdNotIn(List<Integer> values) {
-            addCriterion("catelog_id not in", values, "catelogId");
+        public Criteria andCatelogNotLike(String value) {
+            addCriterion("catelog not like", value, "catelog");
             return (Criteria) this;
         }
 
-        public Criteria andCatelogIdBetween(Integer value1, Integer value2) {
-            addCriterion("catelog_id between", value1, value2, "catelogId");
+        public Criteria andCatelogIn(List<String> values) {
+            addCriterion("catelog in", values, "catelog");
             return (Criteria) this;
         }
 
-        public Criteria andCatelogIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("catelog_id not between", value1, value2, "catelogId");
+        public Criteria andCatelogNotIn(List<String> values) {
+            addCriterion("catelog not in", values, "catelog");
+            return (Criteria) this;
+        }
+
+        public Criteria andCatelogBetween(String value1, String value2) {
+            addCriterion("catelog between", value1, value2, "catelog");
+            return (Criteria) this;
+        }
+
+        public Criteria andCatelogNotBetween(String value1, String value2) {
+            addCriterion("catelog not between", value1, value2, "catelog");
             return (Criteria) this;
         }
 
